@@ -1,24 +1,26 @@
 <?php
-session_start(); ?>
+	session_start();
 
-<?php
-	require('controller/frontend.php');
 
-//--- index page
+	require('controller/BackOfficeController.php');
+	require('controller/CommentController.php');
+	require('controller/PostController.php');
+	require('controller/NavigationController.php');
+	require('controller/UserController.php');
+
+//----------------- INITIALISATION ---------------- //
 	if (isset($_GET['action']))
 	{
 
 //-- --------------------------- POST -------------------- //
 
 //-- get all the posts
-		if ($_GET['action'] == 'listPosts')
+	if ($_GET['action'] == 'listPosts')
 		{
       listPosts();
     }
-
-
 //-- get a post
-		elseif ($_GET['action'] == 'post')
+	elseif ($_GET['action'] == 'post')
 		{
 			if (isset($_GET['id']) && $_GET['id'] > 0)
 			{
@@ -28,35 +30,35 @@ session_start(); ?>
 
 //-- add a post
 	elseif ($_GET['action'] == 'addPost')
-	{
-		if(isset($_POST['title'], $_POST['summary'], $_POST['content']))
 		{
-			$title = $_POST['title'];
-			$summary = $_POST['summary'];
-			$content = $_POST['content'];
-			addedPost($title, $summary, $content);
+			if(isset($_POST['title'], $_POST['summary'], $_POST['content']))
+				{
+					$title = $_POST['title'];
+					$summary = $_POST['summary'];
+					$content = $_POST['content'];
+					addedPost($title, $summary, $content);
+				}
+			else
+				{
+					addPost();
+				}
 		}
-		else
-		{
-			addPost();
-		}
-	}
 
 //edit a post
 	elseif ($_GET['action'] == 'editPost')
-	{
-		$postId=$_GET['postId'];
-		editPost($postId);
-	}
+		{
+			$postId=$_GET['postId'];
+			editPost($postId);
+		}
 
 	elseif ($_GET['action'] == 'editedPost')
-	{
-		$postId=$_GET['postId'];
-		$postTitle=$_POST['title'];
-		$postDescription=$_POST['description'];
-		$postContent=$_POST['content'];
-		editedPost($postId, $postTitle, $postDescription, $postContent);
-	}
+		{
+			$postId=$_GET['postId'];
+			$postTitle=$_POST['title'];
+			$postDescription=$_POST['description'];
+			$postContent=$_POST['content'];
+			editedPost($postId, $postTitle, $postDescription, $postContent);
+		}
 
 // delete a post
 	elseif ($_GET['action'] == 'deletePost')
@@ -64,7 +66,6 @@ session_start(); ?>
 		$postId=$_GET['postId'];
 		deletePost($postId);
 	}
-
 
  // ------------------ COMMENTS  --------------------//
 
@@ -198,7 +199,7 @@ $resultat = $connexion->fetch();
 	}
 
 
-// Navigation //
+//------------------------- NAVIGATION -------------------- //
 
 	elseif ($_GET['action'] == 'signIn')
 		{
@@ -217,9 +218,12 @@ $resultat = $connexion->fetch();
         error();
     }
 
-// Home //
+//-------------- Home ------------------ //
 	}
 	else
 	{
+		$userManager = new UserManager();
+		$userManager->connexionUser($email);
+		
 		home();
 	}
