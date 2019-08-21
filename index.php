@@ -17,14 +17,16 @@
 //-- get all the posts
 	if ($_GET['action'] == 'listPosts')
 		{
-      listPosts();
+			$postController=new PostController();
+			$postController->listPosts();
     }
 //-- get a post
 	elseif ($_GET['action'] == 'post')
 		{
 			if (isset($_GET['id']) && $_GET['id'] > 0)
 			{
-					post();
+				$postController=new PostController();
+				$postController->post();
 			}
 		}
 
@@ -36,11 +38,13 @@
 					$title = $_POST['title'];
 					$summary = $_POST['summary'];
 					$content = $_POST['content'];
-					addedPost($title, $summary, $content);
+					$postController=new PostController();
+					$postController->addedPost($title, $summary, $content);
 				}
 			else
 				{
-					addPost();
+					$postController=new PostController();
+					$postController->addPost();
 				}
 		}
 
@@ -48,7 +52,8 @@
 	elseif ($_GET['action'] == 'editPost')
 		{
 			$postId=$_GET['postId'];
-			editPost($postId);
+			$postController=new PostController();
+			$postController->editPost($postId);
 		}
 
 	elseif ($_GET['action'] == 'editedPost')
@@ -57,14 +62,16 @@
 			$postTitle=$_POST['title'];
 			$postDescription=$_POST['description'];
 			$postContent=$_POST['content'];
-			editedPost($postId, $postTitle, $postDescription, $postContent);
+			$postController=new PostController();
+			$postController->editedPost($postId, $postTitle, $postDescription, $postContent);
 		}
 
 // delete a post
 	elseif ($_GET['action'] == 'deletePost')
 	{
 		$postId=$_GET['postId'];
-		deletePost($postId);
+		$postController=new PostController();
+		$postController->deletePost($postId);
 	}
 
  // ------------------ COMMENTS  --------------------//
@@ -79,7 +86,9 @@
 			{
 				$content = $_POST['content'];
 				$postId = $_GET['id'];
-				addComment($content, $postId);
+
+				$commentController=new CommentController();
+				$commentController->addComment($content, $postId);
 			}
 			else
 			{
@@ -98,7 +107,8 @@
 	{
 		$commentId=$_GET['commentId'];
 		$postId=$_GET['postId'];
-		editComment($commentId, $postId);
+		$commentController=new CommentController();
+		$commentController->editComment($commentId, $postId);
 	}
 
 	elseif ($_GET['action'] == 'editedComment')
@@ -106,19 +116,10 @@
 		$commentId=$_GET['commentId'];
 		$commentContent=$_POST['content'];
 		$postId=$_GET['postId'];
-		editedComment($commentId, $commentContent, $postId);
+
+		$commentController=new CommentController();
+		$commentController->editedComment($commentId, $commentContent, $postId);
 	}
-
-	//{
-	//	updateComment($_GET['Id'], $_GET['content']);
-
-	//	if($editedLines===false)
-	//	{
-	//		die('Impossible de modifier le commentaire.');
-	//	}
-
-	//	header('Location:index.php?action=listPostView');
-//	}
 
 // delete a comment
 
@@ -126,7 +127,9 @@
 	{
 		$commentId = $_GET['commentId'];
 		$postId= $_GET['post'];
-		deleteComment($commentId, $postId);
+
+		$userController=new UserController();
+		$userController->deleteComment($commentId, $postId);
 	}
 
 // ------------------- USER ----------------- //
@@ -139,7 +142,9 @@
 			if($_POST['password']==$_POST['password2'])
 			{
 				$pass_hash = password_hash($_POST['password'],PASSWORD_DEFAULT);
-				addUser($_POST['name'],$_POST['first_name'],$_POST['email'],$pass_hash);
+
+				$userController=new UserController();
+				$userController->addUser($_POST['name'],$_POST['first_name'],$_POST['email'],$pass_hash);
 			}
 			else
 			{
@@ -160,13 +165,8 @@
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
-// ----------- code à couper ----------- //
-$db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');
-
-$connexion = $db->prepare('SELECT id, name, first_name, email, password, role FROM user WHERE email = ?');
-$connexion->execute(array($email));
-$resultat = $connexion->fetch();
-// ----------- fin de coupe --------------//
+		$userController=new UserController();
+		$userController->testConnection();
 
 		$isPasswordCorrect = password_verify($password, $resultat['password']);
 
@@ -183,7 +183,8 @@ $resultat = $connexion->fetch();
 				$_SESSION['first_name'] = $resultat['first_name'];
 				$_SESSION['email'] = $resultat['email'];
 
-				joinUser_done();
+				$userController=new UserController();
+				$userController->joinUser_done();
 			}
 			else
 			{
@@ -195,7 +196,8 @@ $resultat = $connexion->fetch();
 
 	elseif($_GET['action'] == 'admin')
 	{
-		admin();
+		$backOfficeController=new BackOfficeController();
+		$backOfficeController->admin();
 	}
 
 
@@ -203,27 +205,29 @@ $resultat = $connexion->fetch();
 
 	elseif ($_GET['action'] == 'signIn')
 		{
-			signIn();
+			$navigationController=new NavigationController();
+			$navigationController->signIn();
 		}
 	elseif ($_GET['action'] == 'signUp')
 		{
-			signUp();
+			$navigationController=new NavigationController();
+			$navigationController->signUp();
 		}
 	elseif ($_GET['action'] == 'leave')
 		{
-			leave();
+			$navigationController=new NavigationController();
+			$navigationController->leave();
 		}
     else
     {
-        error();
+			$navigationController=new NavigationController();
+			$navigationController->error();
     }
 
 //-------------- Home ------------------ //
 	}
 	else
 	{
-		$userManager = new UserManager();
-		$userManager->connexionUser($email);
-		
-		home();
+		$navigationController = new NavigationController();
+		$navigationController ->home();
 	}

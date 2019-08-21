@@ -8,7 +8,7 @@ require_once('model/UserManager.php');
 
 Class CommentController
 {
-  function addComment($content, $postId)
+  public function addComment($content, $postId)
   	{
   		$commentManager = new CommentManager();
   		$affectedLines = $commentManager->postComment($content, $postId);
@@ -23,7 +23,7 @@ Class CommentController
   			}
   	}
 
-  function editComment($commentId, $postId)
+  public function editComment($commentId, $postId)
     {
     	$commentManager = new CommentManager();
     	$comments = $commentManager-> getComment($commentId, $postId);
@@ -32,7 +32,7 @@ Class CommentController
     	require('view/template.php');
     }
 
-  function editedComment($commentId, $commentContent, $postId)
+  public function editedComment($commentId, $commentContent, $postId)
     {
     	$commentManager = new CommentManager();
     	$editedLines = $commentManager->editedComment($commentId, $commentContent);
@@ -48,7 +48,7 @@ Class CommentController
     		}
     }
 
-  function deleteComment($commentId, $postId)
+  public function deleteComment($commentId, $postId)
     {
     	$commentManager = new CommentManager();
     	$removeComment = $commentManager->removeComment($commentId);

@@ -5,7 +5,7 @@
 
 
 		<?php
-			if($_SESSION['id']==$post["author"])
+			if(isset($_SESSION['id']) && $_SESSION['id']==$post["author"])
 			{
 		?>
 				<div>
@@ -50,7 +50,7 @@
 				<strong><?= htmlspecialchars($comment['writter_name']) ?> <?= htmlspecialchars($comment['writter']) ?></strong> le <?= $comment['comment_date'] ?>
 
 				<?php
-					if(htmlspecialchars($comment['writter_id']) == $_SESSION['id'])
+					if(isset($_SESSION['id']) && htmlspecialchars($comment['writter_id']) == $_SESSION['id'])
 					{
 				?>
 
