@@ -4,6 +4,6 @@
   </p>
 
   <p>
-      Veuillez vous connecter : <a href="signUp.php">Connexion</a>
+      Veuillez vous connecter : <a href="index.php?action=signUp">Connexion</a>
   </p>
 </div>

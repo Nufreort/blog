@@ -23,4 +23,14 @@ class UserManager extends Manager
 
 				return $resultat;
 			}
+		public function testedConnection()
+		{
+			$db = $this->dbConnect();
+
+			$connexion = $db->prepare('SELECT id, name, first_name, email, password, role FROM user WHERE email = ?');
+			$connexion->execute(array($email));
+			$resultat = $connexion->fetch();
+
+			return $resultat;			
+		}
 	}
