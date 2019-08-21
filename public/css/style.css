@@ -1,0 +1,70 @@
+h1, h3
+{
+    text-align:center;
+}
+
+h1
+{
+  text-decoration: underline red !important;
+}
+h3
+{
+    background-color:black;
+    color:white;
+    font-size:0.9em;
+    margin-bottom:0px;
+}
+.news p
+{
+    background-color:#CCCCCC;
+    margin-top:0px;
+}
+.news
+{
+    width:70%;
+    margin:auto;
+}
+
+a
+{
+    text-decoration: none;
+    color: blue;
+}
+
+.logo-v
+{
+  width: 70px;
+  height: 70px !important;
+}
+
+.icone-perso
+{
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.nav-perso
+{
+  height: 300px;
+}
+
+.bloc
+{
+	border:2px black solid;
+}
+
+.img-perso1
+{
+  max-width: 300px !important;
+  max-height: 400px !important;
+}
+
+.nav-perso
+{
+  height: 80px !important;
+}
+form
+{
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
