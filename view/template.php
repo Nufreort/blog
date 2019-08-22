@@ -31,7 +31,7 @@
   					<li><a href="index.php?action=leave" class="waves-effect waves-light btn-small red black-text"><i class="small material-icons">power_settings_new</i></a></li>
           </ul>
 
-<!-------------- MOBILE MENU
+<!-- MOBILE MENU
           <a href="#" data-activates="mobile-menu" class="button-collapse right"><i class="material-icons">menu</i></a>
           <ul id="side-nave" id="mobile-menu" class="right">
             <li><a href="index.php">Accueil</a></li>
@@ -58,9 +58,10 @@
             <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
           </ul>
           <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
--->
+
         </div>
       </nav>
+    -->
 		</header>
 
 		<?php
@@ -82,8 +83,12 @@
             </div>
           </div>
         </footer>
-
+        
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
 		<script type="text/javascript" src="public/js/materialize.min.js"></script>
-    <script type="text/javascrpt" src="public/js/script.js"></script>
+    <script type="text/javascript" src="public/js/script.js"></script>
     </body>
 </html>

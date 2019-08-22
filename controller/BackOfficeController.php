@@ -13,7 +13,7 @@ Class BackOfficeController
 		$posts = $postManager->getPosts();
 
 		$commentManager = new CommentManager();
-		$comments = $commentManager-> getSendedComments();
+		$comments = $commentManager->getSendedComments();
 
 		$page = 'view/BackOffice/backOffice.php';
 		require('view/template.php');
