@@ -1,6 +1,7 @@
 <div class="container">
   <h1> Tableau d'administration</h1>
 
+
 <h2>Gestion des billets :</h2>
 
 <?php
@@ -65,9 +66,10 @@ $posts->closeCursor();
 
 <?php
   }
-
-  while ($comment = $comments->fetch())
+  else
   {
+    while ($comment = $comments->fetch())
+      {
 ?>
 
 <table class="centered highlight responsive-table">
@@ -92,6 +94,7 @@ $posts->closeCursor();
 
 <?php
   }
+}
 ?>
 
 <br />
