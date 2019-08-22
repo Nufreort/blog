@@ -170,17 +170,20 @@
 
 		if(isset($connectedUser))
 			{
-				$_SESSION['id'] = $resultat['id'];
-				$_SESSION['name'] = $resultat['name'];
-				$_SESSION['first_name'] = $resultat['first_name'];
-				$_SESSION['email'] = $resultat['email'];
+				$_SESSION['id'] = $connectedUser['id'];
+				$_SESSION['name'] = $connectedUser['name'];
+				$_SESSION['first_name'] = $connectedUser['first_name'];
+				$_SESSION['email'] = $connectedUser['email'];
 
 				$userController=new UserController();
 				$userController->joinUser_done();
 			}
 			else
 			{
-				echo 'Mauvais identifiant ou mot de passe ! (erreur 2)';
+				$errorMessage = 'Mauvais identifiant ou mot de passe ! (erreur 2)';
+
+				$navigationController=new navigationController();
+				$navigationController->errorMessage($errorMessage);
 			}
 		}
 

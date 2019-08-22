@@ -33,6 +33,11 @@ class NavigationController
             $page = 'view/errorPage.php';
             require('view/template.php');
 		}
+	public function errorMessage($errorMessage)
+		{
+	           $page = 'view/errorMessage.php';
+	           require('view/template.php');
+		}
 	public function home()
 		{
 	          	$page = 'view/presentation.php';
