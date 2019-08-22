@@ -29,9 +29,9 @@ Class UserController
   		$userManager->connexionUser($email);
   	}
 
-    public function testConnection($email)
+    public function testConnection($email, $password)
     	{
     		$userManager = new UserManager();
-    		$userManager->testedConnection($email);
+    		$userManager->testedConnection($email, $password);
     	}
 }

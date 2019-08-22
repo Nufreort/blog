@@ -23,15 +23,6 @@ class CommentManager extends Manager
 			return $comments;
 		}
 
-		public function getSendedComments()
-		{
-			$db = $this->dbConnect();
-
-			$comments = $db->query('SELECT comment.id, comment.author, comment.content, user.id AS writter_id, user.name AS writter_name, user.first_name AS writter, DATE_FORMAT(comment.date, \'%d/%m/%y à %Hh%imin\') AS comment_date FROM comment INNER JOIN user ON user.id = comment.author WHERE statut = 0 ORDER BY comment_date DESC');
-
-			return $comments;
-		}
-
 		public function postComment($content, $postId)
 		{
 			$db = $this->dbConnect();

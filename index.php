@@ -166,17 +166,9 @@
 		$password = $_POST['password'];
 
 		$userController=new UserController();
-		$userController->testConnection();
+		$userController->testConnection($email, $password);
 
-		$isPasswordCorrect = password_verify($password, $resultat['password']);
-
-		if (!$resultat['password'])
-		{
-			echo 'Mauvais identifiant ou mot de passe !';
-		}
-		else
-		{
-			if($isPasswordCorrect)
+		if(isset($connectedUser))
 			{
 				$_SESSION['id'] = $resultat['id'];
 				$_SESSION['name'] = $resultat['name'];
@@ -191,13 +183,20 @@
 				echo 'Mauvais identifiant ou mot de passe ! (erreur 2)';
 			}
 		}
-	}
+
 // ------------------------- BACK OFFICE --------------------///
 
 	elseif($_GET['action'] == 'admin')
 	{
 		$backOfficeController=new BackOfficeController();
 		$backOfficeController->admin();
+	}
+
+	elseif($_GET['action'] == 'removePostValidator')
+	{
+		$postId = $_GET['postId'];
+		$backOfficeController=new BackOfficeController();
+		$backOfficeController->removePostValidator($postId);
 	}
 
 
