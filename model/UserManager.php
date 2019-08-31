@@ -27,7 +27,7 @@ class UserManager extends Manager
 		{
 			$db = $this->dbConnect();
 
-			$connexion = $db->prepare('SELECT id, name, first_name, email, password, role FROM user WHERE email = ? AND password = ?');
+			$connexion = $db->prepare('SELECT * FROM user WHERE email = ? AND password = ?');
 			$connectedUser = $connexion->execute(array($email, $password));
 
 			return $connectedUser;

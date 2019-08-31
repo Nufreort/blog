@@ -169,30 +169,47 @@
 		$userController->testConnection($email, $password);
 
 		if(isset($connectedUser))
-			{
+		{
+			echo 'oui';
+		}
+		else {
+			echo 'non';
+		}
+
+
+		/*	{
 				$_SESSION['id'] = $connectedUser['id'];
 				$_SESSION['name'] = $connectedUser['name'];
 				$_SESSION['first_name'] = $connectedUser['first_name'];
 				$_SESSION['email'] = $connectedUser['email'];
+				$_SESSION['role'] = $roleUser;
 
 				$userController=new UserController();
 				$userController->joinUser_done();
-			}
+	}
 			else
 			{
 				$errorMessage = 'Mauvais identifiant ou mot de passe ! (erreur 2)';
 
 				$navigationController=new navigationController();
 				$navigationController->errorMessage($errorMessage);
-			}
+			}*/
 		}
 
 // ------------------------- BACK OFFICE --------------------///
 
 	elseif($_GET['action'] == 'admin')
 	{
-		$backOfficeController=new BackOfficeController();
-		$backOfficeController->admin();
+		if($roleUser=='admin')
+		{
+			$backOfficeController=new BackOfficeController();
+			$backOfficeController->admin();
+		}
+
+		else
+		{
+			Echo "Cet espace est réservé aux administrateurs !";
+		}
 	}
 
 	elseif($_GET['action'] == 'removePostValidator')
@@ -202,6 +219,24 @@
 		$backOfficeController->removePostValidator($postId);
 	}
 
+	elseif($_GET['action'] == 'acceptedPostValidator')
+	{
+		$postId = $_GET['postId'];
+		$backOfficeController=new BackOfficeController();
+		$backOfficeController->acceptedPostValidator($postId);
+	}
+
+	elseif($_GET['action'] == 'backConnection')
+	{
+		$backOfficeController=new BackOfficeController();
+		$backOfficeController->backConnection();
+	}
+
+	elseif($_GET['action'] == 'joinAdmin')
+	{
+		$backOfficeController=new BackOfficeController();
+		$backOfficeController->joinAdmin();
+	}
 
 //------------------------- NAVIGATION -------------------- //
 

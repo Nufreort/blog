@@ -43,7 +43,7 @@
         </p>
 
         <div class="center">
-          <a class="waves-effect waves-light btn green"><i class="material-icons">check</i></a>
+          <a href="index.php?action=acceptedPostValidator&amp;postId=<?= $data['id'] ?>" class="waves-effect waves-light btn green"><i class="material-icons">check</i></a>
           <a href="index.php?action=removePostValidator&amp;postId=<?= $data['id'] ?>" class="waves-effect waves-light btn red"><i class="material-icons">clear</i></a>
           <br />
         </div>

@@ -28,4 +28,26 @@ Class BackOfficeController
 		$page = 'view/BackOffice/backOffice.php';
 		require('view/template.php');
 	}
+
+	public function acceptedPostValidator($postId)
+	{
+		$backOfficeManager = new BackOfficeManager();
+		$backPosts = $backOfficeManager->acceptedPostValidator($postId);
+
+		$page = 'view/BackOffice/backOffice.php';
+		require('view/template.php');
+	}
+
+	public function backConnection()
+	{
+		$page = 'view/BackOffice/backConnection.php';
+		require('view/template.php');
+	}
+
+	public function joinAdmin($email, $password)
+	{
+		$backOfficeManager = new BackOfficeManager();
+		$backPosts = $backOfficeManager->joinAdmin($email, $password);
+	}
+
 }

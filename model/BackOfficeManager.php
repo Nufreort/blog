@@ -16,7 +16,7 @@ class BackOfficeManager extends Manager
     {
       $db = $this->dbConnect();
 
-      $backPosts = $db->query('SELECT * from post');
+      $backPosts = $db->query('SELECT * from post WHERE statut = 0');
 
       return $backPosts;
     }
@@ -31,6 +31,16 @@ class BackOfficeManager extends Manager
       return $backPosts;
     }
 
+		public function acceptedPostValidator($postId)
+    {
+      $db = $this->dbConnect();
+
+      $backPosts = $db->prepare('UPDATE `post` SET `statut`=1 WHERE id = ?');
+      $backPosts->execute(array($postId));
+
+      return $backPosts;
+    }
+
     public function getCommentsValidator()
       {
         $db = $this->dbConnect();
@@ -39,4 +49,14 @@ class BackOfficeManager extends Manager
 
         return $backComments;
       }
+
+			public function joinAdmin($email, $password)
+	    {
+	      $db = $this->dbConnect();
+
+	      $backPosts = $db->prepare('SELECT * from user');
+	      $backPosts->execute(array($email, $password));
+
+	      return $backPosts;
+	    }
   }
