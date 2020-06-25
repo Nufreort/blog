@@ -79,7 +79,14 @@
           <div class="footer-copyright">
             <div class="container">
             © 2019 Copyright LDX Corp.
-            <a class="waves-effect waves-light btn right" href="index.php?action=admin">Admin</a>
+            <?php
+              if(isset($_SESSION['role']) AND $_SESSION['role']=='admin')
+              {
+                ?>
+                <a class="waves-effect waves-light btn right" href="index.php?action=admin">Admin</a>
+                <?php
+              }
+            ?>
             </div>
           </div>
         </footer>

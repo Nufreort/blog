@@ -159,6 +159,48 @@
 
 // user connexion
 
+elseif($_GET['action'] == 'joinUser')
+	{
+
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+
+// ----------- code à couper ----------- //
+$db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');
+
+$connexion = $db->prepare('SELECT id, name, first_name, email, password, role FROM user WHERE email = ?');
+$connexion->execute(array($email));
+$resultat = $connexion->fetch();
+// ----------- fin de coupe --------------//
+
+		$isPasswordCorrect = password_verify($password, $resultat['password']);
+
+		if (!$resultat['password'])
+		{
+			echo 'Mauvais identifiant ou mot de passe !';
+		}
+		else
+		{
+			if($isPasswordCorrect)
+			{
+				$_SESSION['id'] = $resultat['id'];
+				$_SESSION['name'] = $resultat['name'];
+				$_SESSION['first_name'] = $resultat['first_name'];
+				$_SESSION['email'] = $resultat['email'];
+				$_SESSION['role'] = $resultat['role'];
+
+//------réussir à passer par le routeur----//
+				$page = 'view/memberarea/signUp_done.php';
+        require('view/template.php');
+			}
+			else
+			{
+				echo 'Mauvais identifiant ou mot de passe ! (erreur 2)';
+			}
+		}
+	}
+
+/*
 	elseif($_GET['action'] == 'joinUser')
 	{
 
@@ -176,7 +218,8 @@
 			echo 'non';
 		}
 
-
+-----------------------
+----------------------- deja en commentaire / ANTE
 		/*	{
 				$_SESSION['id'] = $connectedUser['id'];
 				$_SESSION['name'] = $connectedUser['name'];
@@ -194,14 +237,19 @@
 				$navigationController=new navigationController();
 				$navigationController->errorMessage($errorMessage);
 			}*/
-		}
+
+	// end of user connexion
 
 // ------------------------- BACK OFFICE --------------------///
 
 	elseif($_GET['action'] == 'admin')
 	{
-		if($roleUser=='admin')
+		$backOfficeController=new BackOfficeController();
+		$backOfficeController->admin();
+		/* --- parametrer le bouton en fonction du rôle
+		if($resultat['role']=='admin')
 		{
+			//----- retirer le message d'erreur pour les intrusions ----///
 			$backOfficeController=new BackOfficeController();
 			$backOfficeController->admin();
 		}
@@ -210,6 +258,7 @@
 		{
 			Echo "Cet espace est réservé aux administrateurs !";
 		}
+		*/
 	}
 
 	elseif($_GET['action'] == 'removePostValidator')

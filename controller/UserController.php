@@ -29,6 +29,13 @@ Class UserController
   		$userManager->connexionUser($email);
   	}
 
+    public function joinUser_done()
+    	{
+        $page = 'view/memberarea/signUp_done.php';
+        require('view/template.php');
+    	}
+
+
   public function testConnection($email, $password)
   	{
   		$userManager = new UserManager();
