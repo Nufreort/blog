@@ -90,14 +90,17 @@
     <td><?= $comment['comment_date'] ?></td>
     <td><?= nl2br(htmlspecialchars($comment['content'])) ?></td>
     <td>
-      <a class="waves-effect waves-light btn green"><i class="material-icons">check</i></a>
-      <a class="waves-effect waves-light btn red"><i class="material-icons">clear</i></a>
+      <a href="index.php?action=acceptedCommentValidator&amp;commentId=<?= $comment['id'] ?>" class="waves-effect waves-light btn green"><i class="material-icons">check</i></a>
+      <a href="index.php?action=removeCommentValidator&amp;commentId=<?= $comment['id'] ?>" class="waves-effect waves-light btn red"><i class="material-icons">clear</i></a>
     </td>
   </tr>
 </table>
 
 <?php
   }
+
+  $backComments->closeCursor();
+
 }
 ?>
 

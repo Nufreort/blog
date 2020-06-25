@@ -275,6 +275,20 @@ $resultat = $connexion->fetch();
 		$backOfficeController->acceptedPostValidator($postId);
 	}
 
+	elseif($_GET['action'] == 'removeCommentValidator')
+	{
+		$commentId = $_GET['commentId'];
+		$backOfficeController=new BackOfficeController();
+		$backOfficeController->removeCommentValidator($commentId);
+	}
+
+	elseif($_GET['action'] == 'acceptedCommentValidator')
+	{
+		$commentId = $_GET['commentId'];
+		$backOfficeController=new BackOfficeController();
+		$backOfficeController->acceptedCommentValidator($commentId);
+	}
+
 	elseif($_GET['action'] == 'backConnection')
 	{
 		$backOfficeController=new BackOfficeController();

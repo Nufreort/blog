@@ -38,6 +38,24 @@ Class BackOfficeController
 		require('view/template.php');
 	}
 
+	public function removeCommentValidator($commentId)
+	{
+		$backOfficeManager = new BackOfficeManager();
+		$backPosts = $backOfficeManager->removeCommentValidator($commentId);
+
+		$page = 'view/BackOffice/backOffice.php';
+		require('view/template.php');
+	}
+
+	public function acceptedCommentValidator($commentId)
+	{
+		$backOfficeManager = new BackOfficeManager();
+		$backPosts = $backOfficeManager->acceptedCommentValidator($commentId);
+
+		$page = 'view/BackOffice/backOffice.php';
+		require('view/template.php');
+	}
+
 	public function backConnection()
 	{
 		$page = 'view/BackOffice/backConnection.php';

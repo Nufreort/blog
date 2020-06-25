@@ -41,6 +41,7 @@ class BackOfficeManager extends Manager
       return $backPosts;
     }
 
+
     public function getCommentsValidator()
       {
         $db = $this->dbConnect();
@@ -50,6 +51,29 @@ class BackOfficeManager extends Manager
         return $backComments;
       }
 
+
+			public function removeCommentValidator($commentId)
+	    {
+	      $db = $this->dbConnect();
+
+	      $backComments = $db->prepare('DELETE from comment WHERE id=?');
+	      $backComments->execute(array($commentId));
+
+	      return $backComments;
+	    }
+
+			public function acceptedCommentValidator($commentId)
+	    {
+	      $db = $this->dbConnect();
+
+	      $backComments = $db->prepare('UPDATE `comment` SET `statut`=1 WHERE id = ?');
+	      $backComments->execute(array($commentId));
+
+	      return $backComments;
+	    }
+
+
+/* >Cette fonction est étrange, pas sur qu'elle soit encore valide !
 			public function joinAdmin($email, $password)
 	    {
 	      $db = $this->dbConnect();
@@ -59,4 +83,5 @@ class BackOfficeManager extends Manager
 
 	      return $backPosts;
 	    }
+*/
   }
