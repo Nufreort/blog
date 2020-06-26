@@ -41,7 +41,7 @@ Class BackOfficeController
 	public function removeCommentValidator($commentId)
 	{
 		$backOfficeManager = new BackOfficeManager();
-		$backPosts = $backOfficeManager->removeCommentValidator($commentId);
+		$backComments = $backOfficeManager->removeCommentValidator($commentId);
 
 		$page = 'view/BackOffice/backOffice.php';
 		require('view/template.php');
@@ -50,7 +50,7 @@ Class BackOfficeController
 	public function acceptedCommentValidator($commentId)
 	{
 		$backOfficeManager = new BackOfficeManager();
-		$backPosts = $backOfficeManager->acceptedCommentValidator($commentId);
+		$backComments = $backOfficeManager->acceptedCommentValidator($commentId);
 
 		$page = 'view/BackOffice/backOffice.php';
 		require('view/template.php');

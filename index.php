@@ -7,6 +7,7 @@
 	require('controller/PostController.php');
 	require('controller/NavigationController.php');
 	require('controller/UserController.php');
+	require('controller/MessageController.php');
 
 //----------------- INITIALISATION ---------------- //
 	if (isset($_GET['action']))
@@ -35,9 +36,9 @@
 		{
 			if(isset($_POST['title'], $_POST['summary'], $_POST['content']))
 				{
-					$title = $_POST['title'];
-					$summary = $_POST['summary'];
-					$content = $_POST['content'];
+					$title = htmlspecialchars($_POST['title']);
+					$summary = htmlspecialchars($_POST['summary']);
+					$content = htmlspecialchars($_POST['content']);
 					$postController=new PostController();
 					$postController->addedPost($title, $summary, $content);
 				}
@@ -59,9 +60,9 @@
 	elseif ($_GET['action'] == 'editedPost')
 		{
 			$postId=$_GET['postId'];
-			$postTitle=$_POST['title'];
-			$postDescription=$_POST['description'];
-			$postContent=$_POST['content'];
+			$postTitle=htmlspecialchars($_POST['title']);
+			$postDescription=htmlspecialchars($_POST['description']);
+			$postContent=htmlspecialchars($_POST['content']);
 			$postController=new PostController();
 			$postController->editedPost($postId, $postTitle, $postDescription, $postContent);
 		}
@@ -84,7 +85,7 @@
 		{
 			if (isset($_POST['content']))
 			{
-				$content = $_POST['content'];
+				$content = htmlspecialchars($_POST['content']);
 				$postId = $_GET['id'];
 
 				$commentController=new CommentController();
@@ -114,7 +115,7 @@
 	elseif ($_GET['action'] == 'editedComment')
 	{
 		$commentId=$_GET['commentId'];
-		$commentContent=$_POST['content'];
+		$commentContent=htmlspecialchars($_POST['content']);
 		$postId=$_GET['postId'];
 
 		$commentController=new CommentController();
@@ -141,19 +142,25 @@
 		{
 			if($_POST['password']==$_POST['password2'])
 			{
-				$pass_hash = password_hash($_POST['password'],PASSWORD_DEFAULT);
+				$pass_hash = password_hash(htmlspecialchars($_POST['password']),PASSWORD_DEFAULT);
 
 				$userController=new UserController();
-				$userController->addUser($_POST['name'],$_POST['first_name'],$_POST['email'],$pass_hash);
+				$userController->addUser(htmlspecialchars($_POST['name']),htmlspecialchars($_POST['first_name']),htmlspecialchars($_POST['email']),$pass_hash);
 			}
 			else
 			{
-				echo 'Les mots de passe sont différents.';
+				$errorMessage = 'Les mots de passe sont différents.';
+
+				$messageController=new MessageController();
+				$messageController->errorMessage($errorMessage);
 			}
 		}
 		else
 		{
-			echo 'Tous les champs ne sont pas remplis.';
+			$errorMessage = 'Tous les champs ne sont pas remplis.';
+
+			$messageController=new MessageController();
+			$messageController->errorMessage($errorMessage);
 		}
 	}
 
@@ -162,8 +169,8 @@
 elseif($_GET['action'] == 'joinUser')
 	{
 
-		$email = $_POST['email'];
-		$password = $_POST['password'];
+		$email = htmlspecialchars($_POST['email']);
+		$password = htmlspecialchars($_POST['password']);
 
 // ----------- code à couper ----------- //
 $db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');
@@ -177,7 +184,10 @@ $resultat = $connexion->fetch();
 
 		if (!$resultat['password'])
 		{
-			echo 'Mauvais identifiant ou mot de passe !';
+			$errorMessage = 'Mauvais identifiant ou mot de passe !';
+
+			$messageController=new MessageController();
+			$messageController->errorMessage($errorMessage);
 		}
 		else
 		{
@@ -195,7 +205,10 @@ $resultat = $connexion->fetch();
 			}
 			else
 			{
-				echo 'Mauvais identifiant ou mot de passe ! (erreur 2)';
+				$errorMessage =  'Mauvais identifiant ou mot de passe ! (erreur 2)';
+
+				$messageController=new MessageController();
+				$messageController->errorMessage($errorMessage);
 			}
 		}
 	}

@@ -44,7 +44,7 @@ Class PostController
   		$dataPost = $postManager->sendedPost($title, $summary, $content);
 
 
-  		echo '<p>Votre billet a bien été envoyé, il va être soumis à validation dans les plus brefs délais</p>';
+  		echo '<p>Votre billet a bien été envoyé, il va être soumis à validation dans les plus brefs délais !</p>';
   		$page = 'view/presentation.php';
   		require('view/template.php');
   	}
@@ -63,6 +63,7 @@ Class PostController
     	$postManager = new PostManager();
     	$post = $postManager->editedPost($postId, $postTitle, $postDescription, $postContent);
 
+      echo '<p>Votre billet a bien été modifié, il va être soumis à validation dans les plus brefs délais !</p>';
     	$page = 'view/presentation.php';
     	require('view/template.php');
     }
@@ -72,6 +73,7 @@ Class PostController
   		$postManager = new PostManager();
   		$removedPost = $postManager->removePost($postId);
 
+      echo '<p>Votre billet a bien été supprimé !</p>';
   		$page = 'view/presentation.php';
   		require('view/template.php');
   	}
