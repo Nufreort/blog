@@ -33,10 +33,21 @@ class NavigationController
             $page = 'view/errorPage.php';
             require('view/template.php');
 		}
-	
+
 	public function home()
 		{
-	          	$page = 'view/presentation.php';
-	          	require('view/template.php');
+	          $page = 'view/presentation.php';
+	          require('view/template.php');
 		}
+
+	public function postValidator()
+	{
+						$page = 'view/BackOffice/backOfficePosts.php';
+						require('view/template.php');
+	}
+	public function commentValidator()
+	{
+						$page = 'view/BackOffice/backOfficeComments.php';
+						require('view/template.php');
+	}
 	}

@@ -331,14 +331,25 @@ $resultat = $connexion->fetch();
 			$navigationController=new NavigationController();
 			$navigationController->leave();
 		}
-    else
+	elseif($_GET['action'] == 'postValidator')
+		{
+			$navigationController=new NavigationController();
+			$navigationController->postValidator();
+		}
+		elseif($_GET['action'] == 'commentValidator')
+			{
+				$navigationController=new NavigationController();
+				$navigationController->commentValidator();
+			}
+
+  else
     {
 			$navigationController=new NavigationController();
 			$navigationController->error();
     }
 
 //-------------- Home ------------------ //
-	}
+}
 	else
 	{
 		$navigationController = new NavigationController();

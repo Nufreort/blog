@@ -52,4 +52,16 @@ class CommentManager extends Manager
 
 			return $removedLines;
 		}
+
+		public function countComment()
+		{
+			$db = $this->dbConnect();
+
+			$comments = $db->prepare(' SELECT COUNT (*)  FROM comment WHERE statut = 0 ');
+			$countComments = $comments->execute();
+
+			return $countComments;
+
+			$_SESSION['countComment'] = $countComments;
+		}
 	}

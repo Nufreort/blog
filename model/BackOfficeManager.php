@@ -3,15 +3,16 @@ require_once("model/ManagerGetData.php");
 
 class BackOfficeManager extends Manager
 	{
-  //  public function getPostsValidator()
-	//		{
-	//			$db = $this->dbConnect();
+  /*  public function getPostsValidator()
+			{
+				$db = $this->dbConnect();
 
-	//			$backPosts = $db->query('SELECT post.id, post.title, post.description, post.content, post.author, post.statut, user.name AS writter_name, user.first_name AS writter, DATE_FORMAT(post.post_date, \'%d/%m/%y à %Hh%imin\') AS post_date FROM post INNER JOIN user ON user.id = post.author WHERE statut = 0');
+				$backPosts = $db->query('SELECT post.id, post.title, post.description, post.content, post.author, post.statut, user.name AS writter_name, user.first_name AS writter, DATE_FORMAT(post.post_date, \'%d/%m/%y à %Hh%imin\') AS post_date FROM post INNER JOIN user ON user.id = post.author WHERE statut = 0');
 
-	//			return $backPosts;
-	//		}
+				return $backPosts;
+			}
 
+	*/
     public function getPostsValidator()
     {
       $db = $this->dbConnect();
@@ -20,7 +21,7 @@ class BackOfficeManager extends Manager
 
       return $backPosts;
     }
-
+		
     public function removePostValidator($postId)
     {
       $db = $this->dbConnect();
