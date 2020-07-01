@@ -7,7 +7,7 @@ class PostManager extends Manager
 			{
 				$db = $this->dbConnect();
 
-				$req = $db->query('SELECT post.id, post.title, post.description, post.content, post.author, post.statut, user.name AS writter_name, user.first_name AS writter, DATE_FORMAT(post.post_date, \'%d/%m/%y à %Hh%imin\') AS post_date FROM post INNER JOIN user ON user.id = post.author WHERE statut = 1 ORDER BY post_date DESC LIMIT 0,5');
+				$req = $db->query('SELECT post.id, post.title, post.description, post.content, post.author, post.statut, user.name AS writter_name, user.first_name AS writter, DATE_FORMAT(post.post_date, \'%d/%m/%y à %Hh%imin\') AS post_date FROM post INNER JOIN user ON user.id = post.author WHERE statut = 1 ORDER BY post_date DESC LIMIT 0,20');
 
 				return $req;
 			}

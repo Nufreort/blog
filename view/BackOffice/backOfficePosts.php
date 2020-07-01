@@ -4,7 +4,7 @@
 
 <?php
 var_dump($backPosts);
-/*
+
   if($backPosts->fetch()==NULL)
   {
 ?>

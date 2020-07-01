@@ -82,6 +82,7 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="public/js/materialize.js"></script>
   <script src="public/js/init.js"></script>
+  <script type="text/javascript" src="public/js/dashbord.func.js"></script>
 
     </body>
 </html>
