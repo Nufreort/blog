@@ -25,10 +25,22 @@ Class UserController
   			}
   	}
 
-  public function joinUser($email)
+  public function joinUser($email, $password)
   	{
   		$userManager = new UserManager();
-  		$userManager->connexionUser($email);
+  		$userManager->connexionUser($email, $password);
+
+      if(isset($_SESSION['id']))
+      {
+        $infosMessage = 'Vous êtes bien connecté !';
+      }
+      else
+      {
+        $infosMessage= 'Mauvais identifiant ou mot de passe !';
+      }
+
+      $messageController=new MessageController();
+      $messageController->infosMessage($infosMessage);
   	}
 
     public function joinUser_done()

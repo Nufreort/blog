@@ -74,17 +74,30 @@
 		Votre commentaire apparaitre dans les prochaines 72h. Merci de votre compréhension !
 	</p>
 
-	<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
-		<fieldset>
-			<legend>Ajouter votre commentaire :</legend>
-			<div>
-				<label for="content">Commentaire :</label><br />
-				<textarea id="content" name="content"></textarea>
-			</div>
-			<div>
-				<input type="submit" value="Valider" />
-			</div>
-		</fieldset>
-	</form>
+	<?php
+
+		if(isset($_SESSION['id']))
+			{
+				?>
+				<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+					<fieldset>
+						<legend>Ajouter votre commentaire :</legend>
+						<div>
+							<label for="content">Commentaire :</label><br />
+							<textarea id="content" name="content"></textarea>
+						</div>
+						<div>
+							<input type="submit" value="Valider" />
+						</div>
+					</fieldset>
+				</form>
+				<?php
+			}
+		else
+		{
+			echo '<p class=\'red-text\'>Veuillez vous connecter à votre compte pour ajouter un commentaire !</p>';
+		}
+	?>
+
 
 </div>

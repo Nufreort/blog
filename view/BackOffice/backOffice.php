@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th>Titre</th>
+            <th>Chapô</th>
             <th>Contenu</th>
             <th>Actions</th>
         </tr>

@@ -37,7 +37,7 @@ class CommentManager extends Manager
 		{
 			$db = $this->dbConnect();
 
-			$comments = $db->prepare('UPDATE comment SET content=? WHERE id=?');
+			$comments = $db->prepare('UPDATE comment SET content=?, statut=0  WHERE id=?');
 			$editedLines = $comments->execute(array($commentContent, $commentId));
 
 			return $editedLines;

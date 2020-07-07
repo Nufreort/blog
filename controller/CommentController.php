@@ -15,14 +15,11 @@ Class CommentController
   		$commentManager = new CommentManager();
   		$affectedLines = $commentManager->postComment($content, $postId);
 
-  		if ($affectedLines === false)
-  			{
-  				die('Impossible d\'ajouter le commentaire !');
-  			}
-  		else
-  			{
-  				header('Location: index.php?action=post&id=' .$postId);
-  			}
+      $infosMessage= '<p>Votre commentaire a bien été envoyé, il va être soumis à validation dans les plus brefs délais !</p>';
+
+      $page = 'view/infosMessage.php';
+      require('view/template.php');
+
   	}
 
   public function editComment($commentId, $postId)
@@ -39,15 +36,10 @@ Class CommentController
     	$commentManager = new CommentManager();
     	$editedLines = $commentManager->editedComment($commentId, $commentContent);
 
-    	if ($editedLines === false)
-    		{
-    			die('Impossible de modifier le commentaire.');
-    		}
-    	else
-    		{
-    			$page = 'view/presentation.php';
-    			require('view/template.php');
-    		}
+      $infosMessage= '<p>Votre modification a bien été envoyée, elle va être soumise à validation dans les plus brefs délais !</p>';
+
+      $page = 'view/infosMessage.php';
+      require('view/template.php');
     }
 
   public function deleteComment($commentId, $postId)
@@ -55,6 +47,9 @@ Class CommentController
     	$commentManager = new CommentManager();
     	$removeComment = $commentManager->removeComment($commentId);
 
-    	header('Location: index.php?action=post&id=' .$postId);
+      $infosMessage= '<p>Votre commentaire a bien été supprimé !</p>';
+
+      $page = 'view/infosMessage.php';
+      require('view/template.php');
     }
 }

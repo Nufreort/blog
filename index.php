@@ -173,46 +173,26 @@ elseif($_GET['action'] == 'joinUser')
 		$email = htmlspecialchars($_POST['email']);
 		$password = htmlspecialchars($_POST['password']);
 
-// ----------- code à couper ----------- //
-$db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');
+		$userController=new UserController();
+		$userController->joinUser($email, $password);
+	}
 
-$connexion = $db->prepare('SELECT id, name, first_name, email, password, role FROM user WHERE email = ?');
-$connexion->execute(array($email));
-$resultat = $connexion->fetch();
+
+// ----------- code à couper ----------- //
+//------$db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');
+
+
 // ----------- fin de coupe --------------//
 
-		$isPasswordCorrect = password_verify($password, $resultat['password']);
 
-		if (!$resultat['password'])
-		{
-			$errorMessage = 'Mauvais identifiant ou mot de passe !';
-
-			$messageController=new MessageController();
-			$messageController->errorMessage($errorMessage);
-		}
-		else
-		{
-			if($isPasswordCorrect)
-			{
-				$_SESSION['id'] = $resultat['id'];
-				$_SESSION['name'] = $resultat['name'];
-				$_SESSION['first_name'] = $resultat['first_name'];
-				$_SESSION['email'] = $resultat['email'];
-				$_SESSION['role'] = $resultat['role'];
 
 //------réussir à passer par le routeur----//
-				$page = 'view/UserManager/signUp_done.php';
-        require('view/template.php');
-			}
-			else
-			{
-				$errorMessage =  'Mauvais identifiant ou mot de passe ! (erreur 2)';
+//------				$page = 'view/UserManager/signUp_done.php';
+  //------      require('view/template.php');
 
-				$messageController=new MessageController();
-				$messageController->errorMessage($errorMessage);
-			}
-		}
-	}
+
+
+
 
 // ------------------------- BACK OFFICE --------------------///
 
