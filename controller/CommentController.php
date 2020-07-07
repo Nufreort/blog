@@ -3,6 +3,8 @@
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
+require_once('model/BackOfficeManager.php');
+require_once('model/ViewsManager.php');
 
 //----------------- COMMENT ---------------//
 
@@ -52,7 +54,6 @@ Class CommentController
     {
     	$commentManager = new CommentManager();
     	$removeComment = $commentManager->removeComment($commentId);
-
 
     	header('Location: index.php?action=post&id=' .$postId);
     }

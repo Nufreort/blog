@@ -3,6 +3,8 @@
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
+require_once('model/BackOfficeManager.php');
+require_once('model/ViewsManager.php');
 
 //----------------- USER ---------------//
 Class UserController
@@ -18,7 +20,7 @@ Class UserController
   			}
   		else
   			{
-          $page = 'view/memberarea/signIn_done.php';
+          $page = 'view/UserManager/signIn_done.php';
       		require('view/template.php');
   			}
   	}
@@ -31,10 +33,9 @@ Class UserController
 
     public function joinUser_done()
     	{
-        $page = 'view/memberarea/signUp_done.php';
+        $page = 'view/UserManager/signUp_done.php';
         require('view/template.php');
     	}
-
 
   public function testConnection($email, $password)
   	{

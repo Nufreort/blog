@@ -14,7 +14,6 @@ class PostManager extends Manager
 
 		public function getPost($postId)
 			{
-
 				$db = $this->dbConnect();
 
 				$req = $db->prepare('SELECT post.id, post.title, post.description, post.content, post.author, user.name AS writter_name, user.first_name AS writter, DATE_FORMAT(post.post_date, \'%d/%m/%y à %Hh%imin\') AS post_date FROM post INNER JOIN user ON user.id = post.author WHERE post.id = ?');

@@ -3,7 +3,6 @@
 		<a href="index.php?action=listPosts">Retour à la liste des billets</a>
 	</p>
 
-
 		<?php
 			if(isset($_SESSION['id']) && $_SESSION['id']==$post["author"])
 			{
@@ -15,7 +14,6 @@
 		<?php
 			}
 		?>
-
 
 	  <div class="card">
 		  <div class=card-title>
@@ -36,7 +34,6 @@
 				</p>
 		  </div>
 	  </div>
-
 
 	<h2>Commentaires</h2>
 
@@ -72,7 +69,8 @@
 		}
 	?>
 
-	<p> Pour rappel, l'ajout des commentaires est soumis à validation.
+	<p>
+		Pour rappel, l'ajout des commentaires est soumis à validation.
 		Votre commentaire apparaitre dans les prochaines 72h. Merci de votre compréhension !
 	</p>
 

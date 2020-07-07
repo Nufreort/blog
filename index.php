@@ -8,6 +8,7 @@
 	require('controller/NavigationController.php');
 	require('controller/UserController.php');
 	require('controller/MessageController.php');
+	require('controller/MailController.php');
 
 //----------------- INITIALISATION ---------------- //
 	if (isset($_GET['action']))
@@ -200,7 +201,7 @@ $resultat = $connexion->fetch();
 				$_SESSION['role'] = $resultat['role'];
 
 //------réussir à passer par le routeur----//
-				$page = 'view/memberarea/signUp_done.php';
+				$page = 'view/UserManager/signUp_done.php';
         require('view/template.php');
 			}
 			else
@@ -213,65 +214,12 @@ $resultat = $connexion->fetch();
 		}
 	}
 
-/*
-	elseif($_GET['action'] == 'joinUser')
-	{
-
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-
-		$userController=new UserController();
-		$userController->testConnection($email, $password);
-
-		if(isset($connectedUser))
-		{
-			echo 'oui';
-		}
-		else {
-			echo 'non';
-		}
-
------------------------
------------------------ deja en commentaire / ANTE
-		/*	{
-				$_SESSION['id'] = $connectedUser['id'];
-				$_SESSION['name'] = $connectedUser['name'];
-				$_SESSION['first_name'] = $connectedUser['first_name'];
-				$_SESSION['email'] = $connectedUser['email'];
-				$_SESSION['role'] = $roleUser;
-
-				$userController=new UserController();
-				$userController->joinUser_done();
-	}
-			else
-			{
-				$errorMessage = 'Mauvais identifiant ou mot de passe ! (erreur 2)';
-
-				$navigationController=new navigationController();
-				$navigationController->errorMessage($errorMessage);
-			}*/
-
-	// end of user connexion
-
 // ------------------------- BACK OFFICE --------------------///
 
 	elseif($_GET['action'] == 'admin')
 	{
 		$backOfficeController=new BackOfficeController();
 		$backOfficeController->admin();
-		/* --- parametrer le bouton en fonction du rôle
-		if($resultat['role']=='admin')
-		{
-			//----- retirer le message d'erreur pour les intrusions ----///
-			$backOfficeController=new BackOfficeController();
-			$backOfficeController->admin();
-		}
-
-		else
-		{
-			Echo "Cet espace est réservé aux administrateurs !";
-		}
-		*/
 	}
 
 	elseif($_GET['action'] == 'removePostValidator')
@@ -314,6 +262,21 @@ $resultat = $connexion->fetch();
 		$backOfficeController->joinAdmin();
 	}
 
+	//------------------------- ACTION -------------------- //
+
+	elseif ($_GET['action'] == 'mail')
+		{
+			$to ="contact@ldx.com";
+			$subject ="formulaire de contact";
+			$nameContact = $_POST['contact'];
+			$mailContact = $_POST['email'];
+			$messageContact = $_POST['message'];
+			$message =	$nameContact .' Email :'. $mailContact .' Message :'. $messageContact;
+
+			$mailController=new MailController();
+			$mailController->mailTo($to,$subject,$message);
+		}
+
 //------------------------- NAVIGATION -------------------- //
 
 	elseif ($_GET['action'] == 'signIn')
@@ -336,11 +299,11 @@ $resultat = $connexion->fetch();
 			$navigationController=new NavigationController();
 			$navigationController->postValidator();
 		}
-		elseif($_GET['action'] == 'commentValidator')
-			{
-				$navigationController=new NavigationController();
-				$navigationController->commentValidator();
-			}
+	elseif($_GET['action'] == 'commentValidator')
+		{
+			$navigationController=new NavigationController();
+			$navigationController->commentValidator();
+		}
 
   else
     {
@@ -352,6 +315,6 @@ $resultat = $connexion->fetch();
 }
 	else
 	{
-		$navigationController = new NavigationController();
-		$navigationController ->home();
+		$navigationController= new NavigationController();
+		$navigationController->home();
 	}

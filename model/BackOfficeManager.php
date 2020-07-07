@@ -1,7 +1,7 @@
 <?php
-
-
-class BackOfficeManager extends Manager
+	require_once("model/ManagerGetData.php");
+	
+	class BackOfficeManager extends Manager
 	{
     public function getPostsValidator()
     {
@@ -32,7 +32,6 @@ class BackOfficeManager extends Manager
       return $backPosts;
     }
 
-
     public function getCommentsValidator()
       {
         $db = $this->dbConnect();
@@ -42,8 +41,7 @@ class BackOfficeManager extends Manager
         return $backComments;
       }
 
-
-			public function removeCommentValidator($commentId)
+		public function removeCommentValidator($commentId)
 	    {
 	      $db = $this->dbConnect();
 
@@ -53,7 +51,7 @@ class BackOfficeManager extends Manager
 	      return $backComments;
 	    }
 
-			public function acceptedCommentValidator($commentId)
+		public function acceptedCommentValidator($commentId)
 	    {
 	      $db = $this->dbConnect();
 
@@ -63,7 +61,8 @@ class BackOfficeManager extends Manager
 	      return $backComments;
 	    }
   }
-    function get_comments(){
+
+		function get_comments(){
         $db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');;
 
         $req = $db->query("

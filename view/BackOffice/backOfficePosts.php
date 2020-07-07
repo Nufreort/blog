@@ -1,10 +1,6 @@
 <h2>Gestion des billets :</h2>
 
-
-
 <?php
-var_dump($backPosts);
-
   if($backPosts->fetch()==NULL)
   {
 ?>
@@ -54,8 +50,5 @@ var_dump($backPosts);
     <?php
     $backPosts->closeCursor();
     }
-
-
   }
-  */
 ?>

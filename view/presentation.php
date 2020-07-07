@@ -57,7 +57,7 @@
        </div>
 
 
-  <form action="c.loudoux@gmail.com" method="post">
+  <form id="contact" action="index.php?action=mail" method="post">
       <fieldset>
           <legend>Une question ? Envie d'échanger ? Laisser votre message :</legend>
           <div>

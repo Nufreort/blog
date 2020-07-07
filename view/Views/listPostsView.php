@@ -30,13 +30,11 @@
             <br />
             <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Lire l'article</a></em>
         </p>
-      </div>      
+      </div>
     </div>
 
-
-
   <?php
-  }
-  $posts->closeCursor();
+    }
+    $posts->closeCursor();
   ?>
 </div>

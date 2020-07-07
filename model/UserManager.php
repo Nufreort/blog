@@ -1,7 +1,7 @@
 <?php
-require_once("model/ManagerGetData.php");
+	require_once("model/ManagerGetData.php");
 
-class UserManager extends Manager
+		class UserManager extends Manager
 	{
 		public function subUser($name, $first_name, $email, $password)
 			{
