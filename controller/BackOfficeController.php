@@ -4,22 +4,24 @@ require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
 require_once('model/BackOfficeManager.php');
+require_once('model/ViewsManager.php');
 
 //----------------- BACK OFFICE ---------------//
 Class BackOfficeController
 {
 	public function admin()
 	{
-		$backOfficeManager = new BackOfficeManager();
-		$backPosts = $backOfficeManager->getPostsValidator();
-
-		$backOfficeManager = new BackOfficeManager();
-		$backComments = $backOfficeManager->getCommentsValidator();
-
 		$page = 'view/BackOffice/backOffice.php';
 		require('view/template.php');
 	}
 
+	public function backConnection()
+	{
+		$page = 'view/BackOffice/backConnection.php';
+		require('view/template.php');
+	}
+
+// -------------- POSTS VALIDATOR ---------------- //
 	public function removePostValidator($postId)
 	{
 		$backOfficeManager = new BackOfficeManager();
@@ -38,6 +40,8 @@ Class BackOfficeController
 		require('view/template.php');
 	}
 
+// -------------- COMMENTS VALIDATOR ---------------- //
+
 	public function removeCommentValidator($commentId)
 	{
 		$backOfficeManager = new BackOfficeManager();
@@ -54,18 +58,6 @@ Class BackOfficeController
 
 		$page = 'view/BackOffice/backOffice.php';
 		require('view/template.php');
-	}
-
-	public function backConnection()
-	{
-		$page = 'view/BackOffice/backConnection.php';
-		require('view/template.php');
-	}
-
-	public function joinAdmin($email, $password)
-	{
-		$backOfficeManager = new BackOfficeManager();
-		$backPosts = $backOfficeManager->joinAdmin($email, $password);
 	}
 
 }

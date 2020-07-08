@@ -3,6 +3,8 @@
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
+require_once('model/BackOfficeManager.php');
+require_once('model/ViewsManager.php');
 
 //----------------- POST ---------------//
 Class PostController
@@ -13,7 +15,7 @@ Class PostController
 
   		$posts = $postManager->getPosts();
 
-          $page = 'view/frontend/listPostsView.php';
+          $page = 'view/Views/listPostsView.php';
           require('view/template.php');
   	}
 
@@ -26,10 +28,9 @@ Class PostController
   		$post = $postManager->getPost($_GET['id']);
   		$comments = $commentManager-> getComments($_GET['id']);
 
-  		$page = 'view/frontend/postView.php';
+  		$page = 'view/Views/postView.php';
   		require('view/template.php');
   	}
-
 
   public function addPost()
   	{
@@ -43,10 +44,9 @@ Class PostController
   		$postManager = new PostManager();
   		$dataPost = $postManager->sendedPost($title, $summary, $content);
 
-
-  		echo '<p>Votre billet a bien été envoyé, il va être soumis à validation dans les plus brefs délais !</p>';
-  		$page = 'view/presentation.php';
-  		require('view/template.php');
+  		$infosMessage= '<p>Votre billet a bien été envoyé, il va être soumis à validation dans les plus brefs délais !</p>';
+      $page = 'view/infosMessage.php';
+      require('view/template.php');
   	}
 
   public function editPost($postId)
@@ -63,9 +63,9 @@ Class PostController
     	$postManager = new PostManager();
     	$post = $postManager->editedPost($postId, $postTitle, $postDescription, $postContent);
 
-      echo '<p>Votre billet a bien été modifié, il va être soumis à validation dans les plus brefs délais !</p>';
-    	$page = 'view/presentation.php';
-    	require('view/template.php');
+      $infosMessage= '<p>Votre billet a bien été modifié, il va être soumis à validation dans les plus brefs délais !</p>';
+      $page = 'view/infosMessage.php';
+      require('view/template.php');
     }
 
   public function deletePost($postId)
@@ -73,8 +73,8 @@ Class PostController
   		$postManager = new PostManager();
   		$removedPost = $postManager->removePost($postId);
 
-      echo '<p>Votre billet a bien été supprimé !</p>';
-  		$page = 'view/presentation.php';
-  		require('view/template.php');
+      $infosMessage= '<p>Votre billet a bien été supprimé !</p>';
+      $page = 'view/infosMessage.php';
+      require('view/template.php');
   	}
 }

@@ -20,8 +20,6 @@
   </div>
 
 
-
-
   <form action="index.php?action=editedComment&amp;commentId=<?= $comment['id'] ?>&amp;postId=<?= $_GET['postId'] ?>" method="post">
   	<div>
   		<label for="content">Commentaire :</label><br />

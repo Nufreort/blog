@@ -1,7 +1,3 @@
-$(document).ready(function(){
-
-  $(."button-collapse right").sidenav();
-})
 
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.sidenav');

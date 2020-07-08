@@ -1,110 +1,102 @@
-<div class="container">
-  <h1> Tableau d'administration</h1>
-
-
-<h2>Gestion des billets :</h2>
+<h4>Billets à valider : </h4>
 
 <?php
-  if($backPosts->fetch()==NULL)
-  {
-?>
-  <div class="center">
-    Aucun article à valider.
-  </div>
-
-<?php
-  }
-
-  else
-  {
-    while ($data = $backPosts->fetch())
-    {
-    ?>
-
-    <div class="card">
-      <div class="card-title">
-        <h3>
-            <?php echo htmlspecialchars($data['title']); ?>
-            <em>le <?php echo $data['post_date']; ?></em>
-        </h3>
-      </div>
-
-      <div class="card-content">
-        <p>
-          <span class="red-text">Description :</span>
-          <?php echo nl2br(htmlspecialchars($data['description'])); ?>
-        </p>
-      </div>
-
-      <div class="card-content">
-        <p>
-          <span class="red-text">Contenu :</span>
-          <?php echo nl2br(htmlspecialchars($data['content'])); ?>
-        </p>
-
-        <div class="center">
-          <a href="index.php?action=acceptedPostValidator&amp;postId=<?= $data['id'] ?>" class="waves-effect waves-light btn green"><i class="material-icons">check</i></a>
-          <a href="index.php?action=removePostValidator&amp;postId=<?= $data['id'] ?>" class="waves-effect waves-light btn red"><i class="material-icons">clear</i></a>
-          <br />
-        </div>
-      </div>
-    </div>
-
-    <?php
-    }
-    $backPosts->closeCursor();
-
-  }
+     $posts = get_posts();
 ?>
 
+<table>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Chapô</th>
+            <th>Contenu</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if(!empty($posts)) {
+            foreach ($posts as $post) {
+                ?>
+                <tr id="commentaire_<?= $post->id ?>">
+                    <td><?= $post->title ?></td>
+                    <td><?= $post->description ?></td>
+                    <td><?= $post->content ?></td>
+                    <td>
+                        <a href="index.php?action=acceptedPostValidator&amp;postId=<?= $post->id ?>" id="<?= $post->id ?>"
+                           class="btn-floating btn-small waves-effect waves-light green see_comment"><i
+                                class="material-icons">done</i></a>
+                        <a href="index.php?action=removePostValidator&amp;postId=<?= $post->id ?>" id="<?= $post->id ?>"
+                           class="btn-floating btn-small waves-effect waves-light red delete_comment"><i
+                                class="material-icons">delete</i></a>
+                        </div>
+                    </td>
+                </tr>
 
-<h2>Gestion des commentaires :</h2>
+            <?php
+            }
+        }
 
-<?php
-  if($backComments->fetch()==NULL)
-  {
-?>
-  <div class="center">
-    Aucun commentaire à valider.
-  </div>
-
-<?php
-  }
-  else
-  {
-    while ($comment = $backComments->fetch())
-      {
-?>
-
-<table class="centered highlight responsive-table">
-  <thead>
-          <tr>
-              <th>Auteur</th>
-              <th>Date</th>
-              <th>Contenu</th>
-              <th>Action</th>
-          </tr>
-  </thead>
-  <tr>
-    <td><?= htmlspecialchars($comment['writter_name']) ?> <?= htmlspecialchars($comment['writter']) ?></td>
-    <td><?= $comment['comment_date'] ?></td>
-    <td><?= nl2br(htmlspecialchars($comment['content'])) ?></td>
-    <td>
-      <a href="index.php?action=acceptedCommentValidator&amp;commentId=<?= $comment['id'] ?>" class="waves-effect waves-light btn green"><i class="material-icons">check</i></a>
-      <a href="index.php?action=removeCommentValidator&amp;commentId=<?= $comment['id'] ?>" class="waves-effect waves-light btn red"><i class="material-icons">clear</i></a>
-    </td>
-  </tr>
+        else
+        {
+            ?>
+                <tr>
+                    <td></td>
+                    <td><center>Aucun billet à valider</center></td>
+                </tr>
+            <?php
+        }
+        ?>
+    </tbody>
 </table>
 
+<h4>Commentaires à valider :</h4>
+
 <?php
-  }
-
-  $backComments->closeCursor();
-
-}
+     $comments = get_comments();
 ?>
 
-<br />
-<br />
+<table>
+    <thead>
+        <tr>
+            <th>Article</th>
+            <th>Commentaire</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        if(!empty($comments)) {
+            foreach ($comments as $comment) {
+                ?>
+                <tr id="commentaire_<?= $comment->id ?>">
+                    <td><?= $comment->title ?></td>
+                    <td><?= substr($comment->content, 0, 100); ?>...</td>
+                    <td>
 
-</div>
+                        <a href="index.php?action=acceptedCommentValidator&amp;commentId=<?= $comment->id ?>" id="<?= $comment->id ?>"
+                           class="btn-floating btn-small waves-effect waves-light green see_comment"><i
+                                class="material-icons">done</i></a>
+                        <a href="index.php?action=removeCommentValidator&amp;commentId=<?= $comment->id ?>" id="<?= $comment->id ?>"
+                           class="btn-floating btn-small waves-effect waves-light red delete_comment"><i
+                                class="material-icons">delete</i></a>
+
+
+                        </div>
+
+                    </td>
+                </tr>
+
+            <?php
+            }
+        }else{
+            ?>
+                <tr>
+                    <td></td>
+                    <td><center>Aucun commentaire à valider</center></td>
+                </tr>
+            <?php
+        }
+        ?>
+    </tbody>
+</table>

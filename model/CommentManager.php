@@ -37,7 +37,7 @@ class CommentManager extends Manager
 		{
 			$db = $this->dbConnect();
 
-			$comments = $db->prepare('UPDATE comment SET content=? WHERE id=?');
+			$comments = $db->prepare('UPDATE comment SET content=?, statut=0  WHERE id=?');
 			$editedLines = $comments->execute(array($commentContent, $commentId));
 
 			return $editedLines;
@@ -51,5 +51,17 @@ class CommentManager extends Manager
 			$removedLines = $comments->execute(array($commentId));
 
 			return $removedLines;
+		}
+
+		public function countComment()
+		{
+			$db = $this->dbConnect();
+
+			$comments = $db->prepare(' SELECT COUNT (*)  FROM comment WHERE statut = 0 ');
+			$countComments = $comments->execute();
+
+			return $countComments;
+
+			$_SESSION['countComment'] = $countComments;
 		}
 	}

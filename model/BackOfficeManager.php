@@ -1,17 +1,8 @@
 <?php
-require_once("model/ManagerGetData.php");
-
-class BackOfficeManager extends Manager
+	require_once("model/ManagerGetData.php");
+	
+	class BackOfficeManager extends Manager
 	{
-  //  public function getPostsValidator()
-	//		{
-	//			$db = $this->dbConnect();
-
-	//			$backPosts = $db->query('SELECT post.id, post.title, post.description, post.content, post.author, post.statut, user.name AS writter_name, user.first_name AS writter, DATE_FORMAT(post.post_date, \'%d/%m/%y à %Hh%imin\') AS post_date FROM post INNER JOIN user ON user.id = post.author WHERE statut = 0');
-
-	//			return $backPosts;
-	//		}
-
     public function getPostsValidator()
     {
       $db = $this->dbConnect();
@@ -41,7 +32,6 @@ class BackOfficeManager extends Manager
       return $backPosts;
     }
 
-
     public function getCommentsValidator()
       {
         $db = $this->dbConnect();
@@ -51,8 +41,7 @@ class BackOfficeManager extends Manager
         return $backComments;
       }
 
-
-			public function removeCommentValidator($commentId)
+		public function removeCommentValidator($commentId)
 	    {
 	      $db = $this->dbConnect();
 
@@ -62,7 +51,7 @@ class BackOfficeManager extends Manager
 	      return $backComments;
 	    }
 
-			public function acceptedCommentValidator($commentId)
+		public function acceptedCommentValidator($commentId)
 	    {
 	      $db = $this->dbConnect();
 
@@ -71,17 +60,46 @@ class BackOfficeManager extends Manager
 
 	      return $backComments;
 	    }
-
-
-/* >Cette fonction est étrange, pas sur qu'elle soit encore valide !
-			public function joinAdmin($email, $password)
-	    {
-	      $db = $this->dbConnect();
-
-	      $backPosts = $db->prepare('SELECT * from user');
-	      $backPosts->execute(array($email, $password));
-
-	      return $backPosts;
-	    }
-*/
   }
+
+		function get_comments(){
+        $db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');;
+
+        $req = $db->query("
+            SELECT  comment.id,
+                    comment.author,
+                    comment.content,
+                    comment.date,
+                    comment.post_id,
+                    comment.statut,
+                    post.title
+            FROM comment
+            JOIN post
+            ON comment.post_id = post.id
+            WHERE comment.statut = '0'
+            ORDER BY comment.date ASC
+        ");
+
+        $results = [];
+        while($rows = $req->fetchObject()){
+            $results[] = $rows;
+        }
+        return $results;
+    }
+
+    function get_posts(){
+        $db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');;
+
+        $req = $db->query("
+            SELECT  *
+            FROM post
+            WHERE statut = '0'
+        ");
+
+        $results = [];
+        while($rows = $req->fetchObject()){
+            $results[] = $rows;
+        }
+        return $results;
+    }
+    ?>

@@ -3,7 +3,6 @@
 		<a href="index.php?action=listPosts">Retour à la liste des billets</a>
 	</p>
 
-
 		<?php
 			if(isset($_SESSION['id']) && $_SESSION['id']==$post["author"])
 			{
@@ -15,7 +14,6 @@
 		<?php
 			}
 		?>
-
 
 	  <div class="card">
 		  <div class=card-title>
@@ -36,7 +34,6 @@
 				</p>
 		  </div>
 	  </div>
-
 
 	<h2>Commentaires</h2>
 
@@ -72,21 +69,35 @@
 		}
 	?>
 
-	<p> Pour rappel, l'ajout des commentaires est soumis à validation.
+	<p>
+		Pour rappel, l'ajout des commentaires est soumis à validation.
 		Votre commentaire apparaitre dans les prochaines 72h. Merci de votre compréhension !
 	</p>
 
-	<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
-		<fieldset>
-			<legend>Ajouter votre commentaire :</legend>
-			<div>
-				<label for="content">Commentaire :</label><br />
-				<textarea id="content" name="content"></textarea>
-			</div>
-			<div>
-				<input type="submit" value="Valider" />
-			</div>
-		</fieldset>
-	</form>
+	<?php
+
+		if(isset($_SESSION['id']))
+			{
+				?>
+				<form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+					<fieldset>
+						<legend>Ajouter votre commentaire :</legend>
+						<div>
+							<label for="content">Commentaire :</label><br />
+							<textarea id="content" name="content"></textarea>
+						</div>
+						<div>
+							<input type="submit" value="Valider" />
+						</div>
+					</fieldset>
+				</form>
+				<?php
+			}
+		else
+		{
+			echo '<p class=\'red-text\'>Veuillez vous connecter à votre compte pour ajouter un commentaire !</p>';
+		}
+	?>
+
 
 </div>

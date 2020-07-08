@@ -1,6 +1,6 @@
 <div class="container">
   <p>
-    <strong class="red-text"><?= $errorMessage; ?></strong>
+    <strong class="red-text"><?= $infosMessage; ?></strong>
   </p>
 
   <p>
