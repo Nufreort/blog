@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 1- wampserver or equivalent (PHP / Apache / MySQL)
 
 
-### Installing
+### Deployment
 
 1- Download all the files and save them in your server or in the local wwww/ directory
 2- Create a database named "blog" with MySQL, then import the file named "blog.sql"
