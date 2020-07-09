@@ -128,10 +128,10 @@
 	elseif ($_GET['action'] == 'deleteComment')
 	{
 		$commentId = $_GET['commentId'];
-		$postId= $_GET['post'];
+		$postId= $_GET['postId'];
 
-		$userController=new UserController();
-		$userController->deleteComment($commentId, $postId);
+		$commentController=new CommentController();
+		$commentController->deleteComment($commentId, $postId);
 	}
 
 // ------------------- USER ----------------- //
