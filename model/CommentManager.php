@@ -43,12 +43,12 @@ class CommentManager extends Manager
 			return $editedLines;
 		}
 
-		public function removeComment($commentId)
+		public function removeComment($commentId, $postId)
 		{
 			$db = $this->dbConnect();
 
-			$comments = $db->prepare('DELETE FROM comment WHERE id=?');
-			$removedLines = $comments->execute(array($commentId));
+			$comments = $db->prepare('DELETE FROM comment WHERE id=? AND post_id=?');
+			$removedLines = $comments->execute(array($commentId, $postId));
 
 			return $removedLines;
 		}

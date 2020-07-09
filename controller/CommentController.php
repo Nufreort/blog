@@ -45,7 +45,7 @@ Class CommentController
   public function deleteComment($commentId, $postId)
     {
     	$commentManager = new CommentManager();
-    	$removeComment = $commentManager->removeComment($commentId);
+    	$removeComment = $commentManager->removeComment($commentId, $postId);
 
       $infosMessage= '<p>Votre commentaire a bien été supprimé !</p>';
 
