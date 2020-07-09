@@ -1,5 +1,3 @@
-
-
 <?php
      $posts = get_posts();
 ?>
@@ -18,8 +16,10 @@
         </thead>
         <tbody>
             <?php
-            if(!empty($posts)) {
-                foreach ($posts as $post) {
+            if(!empty($posts))
+            {
+                foreach ($posts as $post)
+                {
                     ?>
                     <tr id="commentaire_<?= $post->id ?>">
                         <td><?= $post->title ?></td>
@@ -74,8 +74,10 @@
         </thead>
         <tbody>
             <?php
-            if(!empty($comments)) {
-                foreach ($comments as $comment) {
+            if(!empty($comments))
+            {
+                foreach ($comments as $comment)
+                {
                     ?>
                     <tr id="commentaire_<?= $comment->id ?>">
                         <td><?= $comment->title ?></td>

@@ -4,7 +4,7 @@
 	</p>
 
 		<?php
-			if(isset($_SESSION['id']) && $_SESSION['id']==$post["author"])
+			if(isset($_SESSION['id']) && $_SESSION['id'] == $post['author'])
 			{
 		?>
 				<div>

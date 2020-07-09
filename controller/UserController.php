@@ -43,12 +43,6 @@ Class UserController
       $messageController->infosMessage($infosMessage);
   	}
 
-    public function joinUser_done()
-    	{
-        $page = 'view/UserManager/signUp_done.php';
-        require('view/template.php');
-    	}
-
   public function testConnection($email, $password)
   	{
   		$userManager = new UserManager();

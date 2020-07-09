@@ -19,7 +19,6 @@ Class CommentController
 
       $page = 'view/infosMessage.php';
       require('view/template.php');
-
   	}
 
   public function editComment($commentId, $postId)

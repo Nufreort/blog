@@ -15,15 +15,14 @@ Class PostController
 
   		$posts = $postManager->getPosts();
 
-          $page = 'view/Views/listPostsView.php';
-          require('view/template.php');
+      $page = 'view/Views/listPostsView.php';
+      require('view/template.php');
   	}
 
   public function post()
   	{
   		$postManager = new PostManager();
   		$commentManager = new CommentManager();
-
 
   		$post = $postManager->getPost($_GET['id']);
   		$comments = $commentManager-> getComments($_GET['id']);
@@ -34,7 +33,6 @@ Class PostController
 
   public function addPost()
   	{
-
   		$page = 'view/PostManager/addPost.php';
   		require('view/template.php');
   	}

@@ -1,5 +1,5 @@
 <?php
-require_once("model/ManagerGetData.php");
+require_once('model/ManagerGetData.php');
 
 class CommentManager extends Manager
 	{

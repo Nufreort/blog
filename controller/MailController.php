@@ -10,9 +10,9 @@ require_once('model/ViewsManager.php');
 
 Class MailController
 {
-  public function mailTo($to,$subject,$message)
+  public function mailTo($to, $subject, $message)
   	{
-      $retour = mail($to,$subject,$message);
+      $retour = mail($to, $subject, $message);
       if ($retour)
       {
         $infosMessage = '<p>Votre message a bien été envoyé.</p>';
