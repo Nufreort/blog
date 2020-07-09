@@ -1,5 +1,5 @@
 <?php
-	require_once("model/ManagerGetData.php");
+	require_once('model/ManagerGetData.php');
 
 		class UserManager extends Manager
 	{
@@ -13,16 +13,6 @@
 				return $dataUser;
 			}
 
-		/*public function connexionUser($email)
-			{
-				$db = $this->dbConnect();
-
-				$connexion = $db->prepare('SELECT id, name, first_name, email, password, role FROM user WHERE email = ?');
-				$connexion->execute(array($email));
-				$resultat = $connexion->fetch();
-
-				return $resultat;
-			}*/
 		public function connexionUser($email, $password)
 		{
 			$db = $this->dbConnect();
@@ -33,12 +23,12 @@
 
 			$isPasswordCorrect = password_verify($password, $resultat['password']);
 
-				if (!$resultat['password'])
+				if(!$resultat['password'])
 				{
-					$errorMessage = 'Mauvais identifiant ou mot de passe !';
+					$infosMessage = 'Mauvais identifiant ou mot de passe !';
 
-					$messageController=new MessageController();
-					$messageController->errorMessage($errorMessage);
+					$messageController = new MessageController();
+					$messageController->infosMessage($infosMessage);
 				}
 				else
 				{
@@ -56,7 +46,7 @@
 					}
 					else
 					{
-						$infosMessage =  'Mauvais identifiant ou mot de passe ! (erreur 2)';
+						$infosMessage = 'Mauvais identifiant ou mot de passe ! (erreur 2)';
 
 						return $infosMessage;
 					}

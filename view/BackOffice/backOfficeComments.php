@@ -1,7 +1,7 @@
 <h2>Gestion des commentaires :</h2>
 
 <?php
-  if($backComments->fetch()==NULL)
+  if($backComments->fetch() == NULL)
   {
 ?>
   <div class="center">

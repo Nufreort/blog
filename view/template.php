@@ -70,7 +70,7 @@
 
       <div class="center-align lime lighten-5">
         <?php
-          if(isset($_SESSION['role']) AND $_SESSION['role']=='admin')
+          if(isset($_SESSION['role']) AND $_SESSION['role'] == 'admin')
           {
             ?>
             <a class="waves-effect waves-light btn" href="index.php?action=admin">Admin</a>

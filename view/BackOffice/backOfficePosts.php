@@ -1,7 +1,7 @@
 <h2>Gestion des billets :</h2>
 
 <?php
-  if($backPosts->fetch()==NULL)
+  if($backPosts->fetch() == NULL)
   {
 ?>
   <div class="center">

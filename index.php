@@ -1,7 +1,6 @@
 <?php
 	session_start();
 
-
 	require('controller/BackOfficeController.php');
 	require('controller/CommentController.php');
 	require('controller/PostController.php');
@@ -13,7 +12,6 @@
 //----------------- INITIALISATION ---------------- //
 	if (isset($_GET['action']))
 	{
-
 //-- --------------------------- POST -------------------- //
 
 //-- get all the posts
@@ -78,7 +76,6 @@
 
  // ------------------ COMMENTS  --------------------//
 
-
  // add a comment
 	elseif ($_GET['action'] == 'addComment')
 	{
@@ -94,7 +91,7 @@
 			}
 			else
 			{
-				echo 'Erreur : tous les champs ne sompt pas remplis !' ;
+				echo 'Erreur : tous les champs ne sompt pas remplis !';
 			}
 		}
 		else
@@ -139,14 +136,14 @@
 //add a user
 	elseif ($_GET['action'] == 'addUser')
 	{
-		if (!empty($_POST['name']) && !empty($_POST['first_name']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['password2']))
+		if (!empty(htmlspecialchars($_POST['name'])) && !empty(htmlspecialchars($_POST['first_name'])) && !empty(htmlspecialchars($_POST['email'])) && !empty(htmlspecialchars($_POST['password'])) && !empty(htmlspecialchars($_POST['password2'])))
 		{
-			if($_POST['password']==$_POST['password2'])
+			if(htmlspecialchars($_POST['password'])==htmlspecialchars($_POST['password2']))
 			{
-				$pass_hash = password_hash(htmlspecialchars($_POST['password']),PASSWORD_DEFAULT);
+				$pass_hash = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
 
 				$userController=new UserController();
-				$userController->addUser(htmlspecialchars($_POST['name']),htmlspecialchars($_POST['first_name']),htmlspecialchars($_POST['email']),$pass_hash);
+				$userController->addUser(htmlspecialchars($_POST['name']), htmlspecialchars($_POST['first_name']), htmlspecialchars($_POST['email']), $pass_hash);
 			}
 			else
 			{
@@ -169,30 +166,12 @@
 
 elseif($_GET['action'] == 'joinUser')
 	{
-
 		$email = htmlspecialchars($_POST['email']);
 		$password = htmlspecialchars($_POST['password']);
 
 		$userController=new UserController();
 		$userController->joinUser($email, $password);
 	}
-
-
-// ----------- code à couper ----------- //
-//------$db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');
-
-
-// ----------- fin de coupe --------------//
-
-
-
-//------réussir à passer par le routeur----//
-//------				$page = 'view/UserManager/signUp_done.php';
-  //------      require('view/template.php');
-
-
-
-
 
 // ------------------------- BACK OFFICE --------------------///
 
@@ -246,15 +225,15 @@ elseif($_GET['action'] == 'joinUser')
 
 	elseif ($_GET['action'] == 'mail')
 		{
-			$to ="contact@ldx.com";
-			$subject ="formulaire de contact";
-			$nameContact = $_POST['contact'];
-			$mailContact = $_POST['email'];
-			$messageContact = $_POST['message'];
-			$message =	$nameContact .' Email :'. $mailContact .' Message :'. $messageContact;
+			$to ='contact@ldx.com';
+			$subject ='formulaire de contact';
+			$nameContact = htmlspecialchars($_POST['contact']);
+			$mailContact = htmlspecialchars($_POST['email']);
+			$messageContact = htmlspecialchars($_POST['message']);
+			$message =	$nameContact .' - Email :'. $mailContact .' - Message :'. $messageContact;
 
 			$mailController=new MailController();
-			$mailController->mailTo($to,$subject,$message);
+			$mailController->mailTo($to, $subject, $message);
 		}
 
 //------------------------- NAVIGATION -------------------- //

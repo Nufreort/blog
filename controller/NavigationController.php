@@ -25,11 +25,6 @@ class NavigationController
             $page = 'view/UserManager/leave.php';
             require('view/template.php');
 		}
-	public function joinUser_done()
-		{
-            $page = 'view/UserManager/signUp_done.php';
-            require('view/template.php');
-		}
 	public function error()
 		{
             $page = 'view/infosPage.php';

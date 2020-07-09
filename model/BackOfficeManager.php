@@ -1,6 +1,6 @@
 <?php
-	require_once("model/ManagerGetData.php");
-	
+	require_once('model/ManagerGetData.php');
+
 	class BackOfficeManager extends Manager
 	{
     public function getPostsValidator()
@@ -62,9 +62,9 @@
 	    }
   }
 
-		function get_comments(){
-        $db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');;
-
+		function get_comments()
+		{
+        $db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8', 'root', '');;
         $req = $db->query("
             SELECT  comment.id,
                     comment.author,
@@ -77,18 +77,18 @@
             JOIN post
             ON comment.post_id = post.id
             WHERE comment.statut = '0'
-            ORDER BY comment.date ASC
-        ");
-
+            ORDER BY comment.date ASC");
         $results = [];
-        while($rows = $req->fetchObject()){
+        while($rows = $req->fetchObject())
+				{
             $results[] = $rows;
         }
         return $results;
     }
 
-    function get_posts(){
-        $db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8','root','');;
+    function get_posts()
+		{
+        $db = new PDO('mysql:host=localhost;dbname=myblog;charset=utf8', 'root', '');;
 
         $req = $db->query("
             SELECT  *
@@ -97,9 +97,9 @@
         ");
 
         $results = [];
-        while($rows = $req->fetchObject()){
+        while($rows = $req->fetchObject())
+				{
             $results[] = $rows;
         }
         return $results;
     }
-    ?>
